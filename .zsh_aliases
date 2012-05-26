@@ -1,0 +1,20 @@
+# .zsh_aliases
+#
+# Shell aliases.
+
+alias mplayer='mplayer -heartbeat-cmd "xscreensaver-command -deactivate >/dev/null &"'
+alias e='emacs -nw'
+alias y='yaourt'
+alias a='apparix'
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias lynx='lynx -nopause'
+
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias bm='set_bookmark'
+alias b='get_bookmark'
+alias to='goto_bookmark'

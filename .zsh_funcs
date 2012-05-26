@@ -1,0 +1,136 @@
+# .zsh_funcs
+#
+# Some useful functions.
+
+# Gets the state of the battery.
+function check_bat() {
+    # Get the full and current capacity.
+    # bat0_path="/sys/bus/acpi/drivers/battery/PNP0C0A:00/power_supply/BAT0" # (this is for the algol machine);
+    bat0_path="/sys/bus/acpi/drivers/battery/PNP0C0A:00/power_supply/BAT1"
+    last_full_cap=$(cat "$bat0_path/charge_full")
+    remaining_cap=$(cat "$bat0_path/charge_now")
+    bat_status=$(cat "$bat0_path/status")
+
+    # Show the report.
+    echo "$(($remaining_cap * 100/$last_full_cap))% ($bat_status)"
+} # check_bat
+
+# Shows the information about the frequencies on the processors.
+# Change $NCPU for architectures with a different number of processors.
+function cpufreq_summary() {
+    NCPU=2
+
+    NCPU=$((NCPU - 1))
+    for i in {0..$NCPU} ; do
+	echo "analyzing CPU $i"
+	cpufreq-info | grep "CPU $i" -A 12 | tail -n5
+    done
+} # cpufreq_summary
+
+# Shows some useful statistics about the system.
+# Change $NCPU for architectures with a different number of processors.
+function show_monitor() {
+    # │├∎┌─└
+    echo "\e[1;32m┌ $(uname -a)\e[0m"
+    echo -e "\e[1;32m├$ \e[0m$(uptime) \tbattery: \e[1;34m$(check_bat)\e[0m"
+    echo "\e[1;32m├───────────────────────────\e[0m"
+
+    NCPU=2
+
+    NCPU=$((NCPU - 1))
+    for i in {0..$NCPU} ; do
+	echo "\e[1;32m├$\e[0m analyzing CPU $i: \e[1;34m$(cpufreq-info -f -m -c$i)\e[0m"
+	cpufreq-info | grep -Z "CPU $i" -A12 | tail -n5 | sed 's/^\(.*\)$/\\e[1;32m│\\e[0m\1/' | xargs -0 echo -en
+	echo "\e[1;32m├───────────────────────────\e[0m"
+    done
+
+    ping -c 1 www.google.com | sed 's/^\(.*\)$/\\e[1;32m│\\e[0m\1/' | xargs -0 echo -en
+    echo "\e[1;32m└───────────────────────────\e[0m"
+} # show_monitor
+
+# Runs the monitor.
+function run_monitor() {
+    MONITOR_FILE="/tmp/monitor.log"
+
+    while [ 1 ] ; do
+	show_monitor > $MONITOR_FILE
+	clear
+	less $MONITOR_FILE
+	sleep 2
+    done
+} # run_monitor
+
+# Searches for the definition of the given word/expression in Google.
+function d() {
+    lynx -nopause "www.google.com/search?q=define:$*"
+} # d
+
+# Gets the path associated with the given bookmark.
+function get_bookmark() {
+    if [[ $# -eq 0 ]]; then
+	cat ~/.bookmarks
+	return
+    fi
+
+    LINE=$(grep "^$1" ~/.bookmarks)
+    if [[ $? -ne 0 ]]; then
+	echo "Unknown bookmark: $1."
+	return 1
+    fi
+    echo $LINE | cut -f 2
+} # get_bookmark
+
+# Removes a bookmark by name.
+function delete_bookmark() {
+    if [[ $# -eq 0 ]]; then
+	echo 'No bookmarks specified.'
+	return 1
+    fi
+
+    grep -v "^$1" ~/.bookmarks > /tmp/bookmarks
+    cat /tmp/bookmarks > ~/.bookmarks
+} # delete_bookmark
+
+# Adds a bookmark for the current directory.
+function set_bookmark() {
+    local BOOKMARK
+    BOOKMARK=$(basename "$(pwd)")
+    if [[ $# -ge 1 ]]; then
+	BOOKMARK=$1
+    fi
+
+    grep "^$BOOKMARK" ~/.bookmarks > /dev/null
+    if [[ $? -eq 0 ]]; then
+    	# Such a bookmark already exists.
+    	delete_bookmark $BOOKMARK
+	echo -n 'Redefining '
+    fi
+
+    local CURPWD
+    CURPWD=$(pwd)
+    CURPWD="$CURPWD/"
+    echo "$BOOKMARK -> $CURPWD"
+    echo "$BOOKMARK\t$CURPWD" >> ~/.bookmarks
+} # set_bookmark
+
+# Goes to the directory pointed to by the specified bookmark.
+function goto_bookmark() {
+    if [[ $# -eq 0 ]]; then
+	echo 'No bookmarks specified.'
+	return 1
+    fi
+
+    TARGET=$(get_bookmark $1)
+    if [[ $? -eq 0 ]]; then
+	cd $TARGET
+	return
+    else
+	echo "Unknown bookmark: $1."
+	return 1
+    fi
+} # goto_bookmark
+
+# Shows the tree structure from the TODO mind map.
+function todo() {
+    xmind-parser $(b mmaps)/TODO/todo.xmind
+} # todo

@@ -1,0 +1,11 @@
+[user]
+        email = unlimitedscolobb@gmail.com
+        name = Sergiu Ivanov
+[color]
+        branch = auto
+        diff = auto
+        status = auto
+	interactive = auto
+	ui = auto
+[core]
+	editor = vim
