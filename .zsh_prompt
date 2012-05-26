@@ -13,24 +13,26 @@ function precmd {
     
     PR_FILLBAR=""
     PR_PWDLEN=""
-    
-    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
-    local pwdsize=${#${(%):-%~}}
-    
-    if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
-	    ((PR_PWDLEN=$TERMWIDTH - $promptsize))
-    else
-	PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
-    fi
 
     ###
     # Git repository detection.
 
     if git status >/dev/null 2>&1 ; then
-	PR_BRANCH_NAME="`git branch | grep '*' | cut -d' ' -f2`:"
+	PR_GIT_STATUS_INFO="(`git branch | grep '*' | cut -d' ' -f2`)"
     else
-	PR_BRANCH_NAME=''
+	PR_GIT_STATUS_INFO=''
     fi
+
+    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
+    local pwdsize=${#${(%):-%~}}
+    local gitstatuslen=${#PR_GIT_STATUS_INFO}
+
+    if [[ "$promptsize + $pwdsize + $gitstatuslen" -gt $TERMWIDTH ]]; then
+	    ((PR_PWDLEN=$TERMWIDTH - $promptsize - $gitstatuslen))
+    else
+	PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize + $gitstatuslen)))..${PR_HBAR}.)}"
+    fi
+
 }
 
 
@@ -105,9 +107,9 @@ setprompt () {
     fi
     
     ###
-    # Git repository detection.
+    # Git status output.
 
-    PR_BRANCH='$PR_WHITE${PR_BRANCH_NAME}$PR_LIGHT_BLUE'
+    PR_GIT_STATUS='$PR_WHITE${PR_GIT_STATUS_INFO}$PR_LIGHT_BLUE'
 
     ###
     # Finally, the prompt.
@@ -115,7 +117,7 @@ setprompt () {
     PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
 $PR_CYAN$PR_SHIFT_IN$PR_ULCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
 $PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l\
-$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_HBAR${(e)PR_FILLBAR}$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
+$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_HBAR${(e)PR_FILLBAR}$PR_BLUE$PR_HBAR$PR_SHIFT_OUT${(e)PR_GIT_STATUS}(\
 $PR_MAGENTA%$PR_PWDLEN<...<%~%<<\
 \
 $PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_URCORNER$PR_SHIFT_OUT\
