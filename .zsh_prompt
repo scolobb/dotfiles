@@ -17,8 +17,19 @@ function precmd {
     ###
     # Git repository detection.
 
-    if git status >/dev/null 2>&1 ; then
-	PR_GIT_STATUS_INFO="(`git branch | grep '*' | cut -d' ' -f2`)"
+    GIT_STATUS_FILE='/tmp/scolobb-zsh-prompt'
+
+    git status >$GIT_STATUS_FILE 2>&1
+
+    if [[ $? -eq 0 ]]; then
+	branch=`head -n1 $GIT_STATUS_FILE | cut -d' ' -f4`
+	if grep 'modified:' $GIT_STATUS_FILE >/dev/null 2>&1; then
+	    dirty='*'
+	else
+	    dirty=''
+	fi
+
+	PR_GIT_STATUS_INFO="($branch$dirty)"
     else
 	PR_GIT_STATUS_INFO=''
     fi
