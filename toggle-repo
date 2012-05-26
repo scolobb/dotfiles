@@ -1,0 +1,22 @@
+#!/bin/zsh
+#
+# Toggles the Git repository in the home folder.
+#
+# The goal of this script is to not to have all the home directory be
+# an enormous Git repository.  Although .gitignore makes Git ignore
+# all the directories, git status will still show that we are within a
+# Git repository which I don't like.
+
+autoload colors
+colors
+
+RED="$terminfo[bold]$fg[red]"
+GREEN="$terminfo[bold]$fg[green]"
+NOCOLOUR="$terminfo[sgr0]"
+if [ -d ~/.git ]; then
+    echo "Turning$RED OFF$NOCOLOUR the Git repository for configuration files."
+    mv ~/.git{,-OFF}
+elif [ -d ~/.git-OFF ]; then
+    echo "Turning$GREEN ON$NOCOLOUR the Git repository for configuration files."
+    mv ~/.git{-OFF,}
+fi
