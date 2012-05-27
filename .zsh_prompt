@@ -23,7 +23,7 @@ function precmd {
 
     if [[ $? -eq 0 ]]; then
 	branch=`head -n1 $GIT_STATUS_FILE | cut -d' ' -f4`
-	if grep 'modified:' $GIT_STATUS_FILE >/dev/null 2>&1; then
+	if grep -E '(modified:|new file:|deleted:)' $GIT_STATUS_FILE >/dev/null 2>&1; then
 	    dirty='*'
 	else
 	    dirty=''
