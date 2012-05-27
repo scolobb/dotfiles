@@ -29,7 +29,7 @@ function precmd {
 	    dirty=''
 	fi
 
-	commitsahead=`head -n2 $GIT_STATUS_FILE | grep -o '[0-9][0-9]* commits.' | cut -d' ' -f1`
+	commitsahead=`head -n2 $GIT_STATUS_FILE | grep -o -E '[0-9][0-9]* commit(s)?.' | cut -d' ' -f1`
 
 	if [[ "$commitsahead" == "" ]]; then
 	    PR_GIT_STATUS_INFO="($branch$dirty)"
