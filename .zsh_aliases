@@ -6,6 +6,12 @@ alias mplayer='mplayer -heartbeat-cmd "xscreensaver-command -deactivate >/dev/nu
 alias e='emacs -nw'
 alias y='yaourt'
 alias a='apparix'
+alias g='git'
+alias gch='git checkout'
+alias gcm='git commit'
+alias gb='git branch'
+alias gl='git log'
+alias gdf='git diff'
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
