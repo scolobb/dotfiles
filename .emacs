@@ -84,9 +84,11 @@
 (add-hook 'mail-mode-hook 'flyspell-mode)
 (add-hook 'mail-mode-hook 'auto-fill-mode)
 
+;; Some utility shortcuts.
 (global-set-key [f6] 'ispell-change-dictionary)
 (global-set-key (kbd "C-c q") 'delete-trailing-whitespace)
 (global-set-key (kbd "C-c C-q") 'delete-trailing-whitespace)
+(global-set-key (kbd "C-x C-r") 'revert-buffer)
 
 ;; Enable the narrow-to-region command.
 (put 'narrow-to-region 'disabled nil)
@@ -121,6 +123,9 @@
 (setq org-mobile-inbox-for-pull "~/Dropbox/MobileOrg/mobileorg.org")
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (setq org-mobile-capture-file "~/Dropbox/MobileOrg/mobileorg.org")
+
+;; Load spelling for .org files.
+(add-hook 'org-mode-hook 'flyspell-mode)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
