@@ -81,8 +81,8 @@
 
 ;; Enter flyspell-mode and auto-fill-mode automatically when opening
 ;; mail.
-(add-hook 'mail-mode-hook 'flyspell-mode)
-(add-hook 'mail-mode-hook 'auto-fill-mode)
+;;(add-hook 'mail-mode-hook 'flyspell-mode)
+;;(add-hook 'mail-mode-hook 'auto-fill-mode)
 
 ;; Some utility shortcuts.
 (global-set-key [f6] 'ispell-change-dictionary)
@@ -126,6 +126,9 @@
 
 ;; Load spelling for .org files.
 (add-hook 'org-mode-hook 'flyspell-mode)
+
+;; Enable spelling for text files.
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
