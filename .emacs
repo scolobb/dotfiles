@@ -125,7 +125,7 @@
 (setq org-mobile-capture-file "~/Dropbox/MobileOrg/mobileorg.org")
 
 ;; Load spelling for .org files.
-(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
 
 ;; Enable spelling for text files.
 (add-hook 'text-mode-hook 'flyspell-mode)
