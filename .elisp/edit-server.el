@@ -107,7 +107,7 @@ buffer-specific modes or add key bindings."
 
 ;; frame options
 
-(defcustom edit-server-new-frame t
+(defcustom edit-server-new-frame nil
   "If not nil, edit each buffer in a new frame (and raise it)."
   :group 'edit-server
   :type 'boolean)
