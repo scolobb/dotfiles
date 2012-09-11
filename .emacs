@@ -110,8 +110,9 @@
 ;;(global-set-key (kbd "C-c C-o") 'outline-minor-mode)
 
 ;; Setup auto-pairing of brackets and such.
-(require 'autopair)
-(autopair-global-mode)
+;;(require 'autopair)
+;;(autopair-global-mode)
+(electric-pair-mode)
 
 ;; Set up the org-mode.
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
