@@ -2,10 +2,7 @@
 #
 # Shell aliases.
 
-alias mplayer='mplayer -heartbeat-cmd "xscreensaver-command -deactivate >/dev/null &"'
 alias e='emacs -nw'
-alias y='yaourt'
-alias a='apparix'
 alias g='git'
 alias gch='git checkout'
 alias gcm='git commit'
