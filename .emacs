@@ -49,6 +49,9 @@
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
+;; Setup emacs to open mutt temporary files in mail-mode.
+(add-to-list 'auto-mode-alist '("/mutt-" . mail-mode))
+
 ;; (require 'erlang)
 ;; (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
 
