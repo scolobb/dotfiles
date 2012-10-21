@@ -123,10 +123,10 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(setq org-directory "~/Dropbox/NotesTODOs")
-(setq org-mobile-inbox-for-pull "~/Dropbox/MobileOrg/mobileorg.org")
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
-(setq org-mobile-capture-file "~/Dropbox/MobileOrg/mobileorg.org")
+(setq org-directory "~/Candies/NotesTODOs")
+(setq org-mobile-inbox-for-pull "~/Candies/MobileOrg/mobileorg.org")
+(setq org-mobile-directory "~/Candies/MobileOrg")
+(setq org-mobile-capture-file "~/Candies/MobileOrg/mobileorg.org")
 
 ;; Load spelling for .org files.
 (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
@@ -141,7 +141,7 @@
  ;; If there is more than one, they won't work right.
  '(canlock-password "6df40ec6905eea265b9dc65f43c29fc1e505ac2a")
  '(column-number-mode t)
- '(org-agenda-files (quote ("~/Dropbox/NotesTODOs/household.org" "~/Dropbox/NotesTODOs/gsoc.org" "~/Dropbox/NotesTODOs/phd.org" "~/Dropbox/NotesTODOs/birthdays.org" "~/Dropbox/NotesTODOs/imi.org" "~/Dropbox/NotesTODOs/msc.org" "~/Dropbox/NotesTODOs/notes.org")))
+ '(org-agenda-files (quote ("~/Candies/NotesTODOs/household.org" "~/Candies/NotesTODOs/gsoc.org" "~/Candies/NotesTODOs/phd.org" "~/Candies/NotesTODOs/birthdays.org" "~/Candies/NotesTODOs/imi.org" "~/Candies/NotesTODOs/msc.org" "~/Candies/NotesTODOs/notes.org")))
  '(rw-hunspell-dictionary-menu t)
  '(rw-hunspell-use-rw-ispell t)
  '(scroll-bar-mode nil)
