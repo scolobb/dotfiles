@@ -124,9 +124,9 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 (setq org-directory "~/Candies/NotesTODOs")
-(setq org-mobile-inbox-for-pull "~/Candies/MobileOrg/mobileorg.org")
+(setq org-mobile-inbox-for-pull "~/Candies/NotesTODOs/captured.org")
 (setq org-mobile-directory "~/Candies/MobileOrg")
-(setq org-mobile-capture-file "~/Candies/MobileOrg/mobileorg.org")
+;; (setq org-mobile-capture-file "~/Candies/MobileOrg/mobileorg.org")
 
 ;; Load spelling for .org files.
 (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
