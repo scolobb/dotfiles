@@ -21,3 +21,5 @@ alias l='ls -CF'
 alias bm='set_bookmark'
 alias b='get_bookmark'
 alias to='goto_bookmark'
+
+alias ssh='ssh -o VisualHostKey=yes'
