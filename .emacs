@@ -134,6 +134,9 @@
 ;; Enable spelling for text files.
 (add-hook 'text-mode-hook 'flyspell-mode)
 
+;; Disable all version control hooks.
+(setq vc-handled-backends ())
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
