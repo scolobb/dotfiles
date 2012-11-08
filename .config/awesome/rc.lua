@@ -231,7 +231,7 @@ globalkeys = awful.util.table.join(
               end),
 
     -- Keyboard layouts
-    awful.key({ modkey },            "F9",     function () awful.util.spawn("setxkbmap en_US") end),
+    awful.key({ modkey },            "F9",     function () awful.util.spawn("setxkbmap dvorak") end),
     awful.key({ modkey },            "F10",     function () awful.util.spawn("setxkbmap ru") end),
     awful.key({ modkey },            "F11",     function () awful.util.spawn("setxkbmap ro") end),
     awful.key({ modkey },            "F12",     function () awful.util.spawn("setxkbmap fr") end),
