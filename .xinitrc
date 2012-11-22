@@ -7,8 +7,8 @@ eval `nvidia-settings -l`
 eval `xset r rate 150 100`
 
 # Launch the synergy server.
-eval `synergys -c /etc/synergy.conf`
+#eval `synergys -c /etc/synergy.conf`
 
 xscreensaver -no-splash &
 
-exec awesome
+ssh-agent awesome
