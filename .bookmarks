@@ -1,12 +1,9 @@
 mytmp	/var/tmp/scolobb/
 prj	/home/scolobb/Candies/prj/
-forms	/home/scolobb/Candies/Forms/
-exchange	/home/scolobb/Candies/TempExchange/
 cv	/home/scolobb/Candies/CV/
 msc	/home/scolobb/Candies/MSc/
-sci	/home/scolobb/Candies/Science/
 work	/home/scolobb/Candies/Science/Work/
-lit	/home/scolobb/Documents/Literature/
 notes	/home/scolobb/Candies/NotesTODOs/
 phd	/home/scolobb/Candies/PhD/
 sympy	/home/scolobb/Candies/prj/python/sympy/
+skype	/var/tmp/scolobb/skype/
