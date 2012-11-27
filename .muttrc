@@ -1,0 +1,135 @@
+#======================================================#
+# Boring details
+set realname = "Sergiu Ivanov"
+set from = "sivanov@colimite.fr"
+set use_from = yes
+set sendmail="msmtp -a scolobb@colimite.fr"
+
+#======================================================#
+# Source the file with the passwords.
+source "gpg2 -dq ~/.passwords.gpg |"
+
+#======================================================#
+# IMAP settings
+set imap_user = "scolobb@colimite.fr"
+set imap_pass = $my_colimite_email_password
+
+set folder = "imaps://colimite.fr"
+set spoolfile = "+INBOX"
+set postponed = "+DRAFTS"
+set record = "+SENT"
+
+#======================================================#
+# Watch these mailboxes for new mail:
+set sort_browser=alpha    # Sort mailboxes by alpha(bet)
+set sort=threads
+
+#======================================================#
+# Configuration of checking for new mail.
+set timeout=60
+set mail_check=5
+set check_new=yes
+
+#======================================================#
+# Order of headers and what to show
+hdr_order Date: From: User-Agent: X-Mailer \
+          To: Cc: Reply-To: Subject:
+ignore *
+unignore Date: From: User-Agent: X-Mailer  \
+         To: Cc: Reply-To: Subject:
+               
+#======================================================#
+# which editor do you want to use? 
+set editor="emacs -nw"
+set edit_headers          # See the headers when editing
+
+#======================================================#
+# The aliases are right there.
+
+set alias_file=~/.mutt_aliases
+source $alias_file
+
+#======================================================#
+# Mailcap config.
+set mailcap_path = ~/.mailcap
+auto_view text/html
+
+#======================================================#
+# Odds and ends
+set markers          # mark wrapped lines of text in the pager with a +
+set smart_wrap       # Don't wrap mid-word
+set pager_context=5  # Retain 5 lines of previous page when scrolling.
+set status_on_top    # Status bar on top.
+push <show-version>  # Shows mutt version at startup
+
+#======================================================#
+# Macros
+macro index <f12> s=TRASH<enter>
+
+#======================================================#
+# Header caching
+set header_cache = ~/.mutt_headers/
+
+#======================================================#
+# GnuPG signing functionality
+source ~/.mutt_gpg
+
+#======================================================#
+# Colours: This scheme is fairly basic and only
+# really works if your Terminal background is white
+
+# color hdrdefault black        default   
+# color quoted     red          default   
+# color signature  brightblack  default   
+# color indicator  brightwhite  red
+# color attachment black        green
+# color error      red          default   
+# color message    blue         default   
+# color search     brightwhite  magenta
+# color status     brightyellow blue
+# color tree       red          default   
+# color normal     blue         default   
+# color tilde      green        default   
+# color bold       brightyellow default   
+# color markers    red          default  
+
+color attachment brightmagenta black  
+color error brightwhite red   # errors yell at you in red
+color hdrdefault red black   # headers
+color indicator brightyellow magenta # currently selected message
+#color indicator brightblack white  # currently selected message
+color markers brightcyan black  # the + for wrapped pager lines
+color message brightcyan black  # informational messages, not mail
+color normal white black    # plain text
+color quoted green black  # quoted text
+color search brightgreen black # hilite search patterns in the pager
+color signature red black    # signature (after "-- ") is red 
+color status brightyellow blue # status bar is yellow *on blue*   
+color tilde blue black  # ~'s after message body
+color tree red black    # thread tree in index menu is magenta
+color signature brightred black
+color underline yellow black
+color header cyan black ^(From|Subject): # Important headers
+color body magenta black "(ftp|http)://[^ ]+"  # picks up URLs
+color body magenta black [-a-z_0-9.]+@[-a-z_0-9.]+ 
+
+#  Coloring quoted text - coloring the first 7 levels:
+color quoted    cyan black
+color quoted1   yellow black
+color quoted2   red black
+color quoted3   green black
+color quoted4   cyan black
+color quoted5   yellow black
+color quoted6   red black
+color quoted7   green black
+
+#  Colorize smileys:  :-)  ;-)  :-/  :-(
+color body  yellow black "[;:]-[)/(|]"
+color body  yellow black "[;:][)/(|]"
+color body  green black "[[:alpha:]]\+://[^ ]*"
+
+color index brightyellow black ~N      # New
+color index yellow black ~O              # Old
+color index magenta black ~F
+color index blue black ~T
+color index red black ~D
