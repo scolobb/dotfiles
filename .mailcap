@@ -1,5 +1,5 @@
 # This file describes how to process various MIME types.
-text/html;                       lynx -dump %s;   copiousoutput; nametemplate=%s.html
+text/html;                       lynx -dump -assume_charset=%{charset} -display_charset=utf-8 %s; copiousoutput; nametemplate=%s.html
 
 image/*;                         eog %s
 
