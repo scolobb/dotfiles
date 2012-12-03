@@ -21,6 +21,8 @@ set record = "+SENT"
 
 #======================================================#
 # Watch these mailboxes for new mail:
+mailboxes =INBOX =colimite =haskell =personal =phd =scans =sport =sympy =upec
+
 set sort_browser=alpha    # Sort mailboxes by alpha(bet)
 set sort=threads
 
